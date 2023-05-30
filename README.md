@@ -10,7 +10,7 @@
   <p align="center">
     ***Architecture to collect sensors data from ground and using it to train and develop artificial intelligence models.***
     
-    NOTE: This documentation is still being drafted
+    ***** NOTE: This documentation is still being drafted *****
   </p>
 </div>
 
@@ -82,31 +82,85 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Things you need to have or do before you can install the architecture.
 
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+* A Raspberry Pi 4 Model B, 2GB RAM (others not tested) with the original Raspberry Pi OS or instead you can use a [PiXtend](https://www.pixtend.de)
+	- Offical website : [https://www.raspberrypi.com/products/raspberry-pi-4-model-b](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
+	- Raspberry Pi Imager : [https://downloads.raspberrypi.org/imager](https://downloads.raspberrypi.org/imager/)
+	- PiXtend V2 : [https://www.pixtend.de/start/quickstart-v2](https://www.pixtend.de/start/quickstart-v2/)
+* A DHT11 [Temperature and Humidity Sensor](https://components101.com/sensors/dht11-temperature-sensor)
+	- Hardware setup and Python library can be found here : [ https://www.raspberrypi-spy.co.uk/2017/09/dht11-temperature-and-humidity-sensor-raspberry-pi]( https://www.raspberrypi-spy.co.uk/2017/09/dht11-temperature-and-humidity-sensor-raspberry-pi/) 
+* Create an account and a database on the Influx DB Cloud interface via [https://cloud2.influxdata.com/signup](https://cloud2.influxdata.com/signup)
+* Create an account on the Azure Portal and then follow [this tutorial](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-configuration) to create an *Azure Function*.
 
 
+### Installations
+
+#### Install Python on Raspberry Pi
+
+```bash
+wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz
+sudo tar zxf Python-3.11.3.tgz && cd Python-3.11.3
+sudo ./configure --enable-optimizations
+sudo make -j 4 && sudo make altinstall
+source ~/.bashrc && sudo ln -s /usr/local/bin/python3.11 /usr/bin/python
+```
+
+#### Install Telegraf on Raspberry Pi
+
+```bash
+wget -q https://repos.influxdata.com/influxdata-archive_compat.key
+echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
+echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
+sudo apt-get update && sudo apt-get install telegraf
+sudo usermod -a -G video telegraf
+```
+
+```bash
+sudo systemctl enable telegraf
+sudo systemctl start telegraf
+```
+
+#### Install MariaDB on Raspberry Pi
+
+```bash
+sudo apt install mariadb-server
+sudo pip install mysql-connector-python-rf
+sudo mysql_secure_installation
+```
+
+#### Install InfluxDB on Raspberry Pi
+
+```bash
+wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.0-linux-arm64.tar.gz
+wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.7.1-linux-arm64.tar.gz
+tar xvfz influxdb2-2.7.0-linux-arm64.tar.gz
+tar xvzf influxdb2-client-2.7.1-linux-arm64.tar.gz
+sudo cp influxdb2_linux_arm64/influxd /usr/local/bin/
+sudo cp influx /usr/local/bin/
+sudo nano /etc/systemd/system/influxdb.service
+sudo systemctl daemon-reload && sudo systemctl enable influxdb
+sudo systemctl start influxdb
+```
+
+#### Install Grafana on Raspberry Pi
+
+```bash
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y software-properties-common wget
+sudo wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
+echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+sudo apt-get update && sudo apt-get install grafana
+sudo systemctl enable grafana-server
+sudo systemctl start grafana-server
+```
+
+
+### Configurations
+
+```
+This section must be completed
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -118,7 +172,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 For example, you can use this framework to collect data from a temperature sensor and display it in Grafana. Afterwards, the results of a model's predictions can then be obtained via a simple Telegram notification.
 
-*Refer to the scripts below for more details.*
+*Refer to the detailed script section below for more details.*
 
 ### Scripts
 
@@ -158,5 +212,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 - [@weevood](https://github.com/weevood)
 - Project Link: [https://github.com/weevood/Ground-to-AI](https://github.com/weevood/Ground-to-AI)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
