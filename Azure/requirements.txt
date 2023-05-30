@@ -1,0 +1,11 @@
+# Do not include azure-functions-worker in this file
+# The Python Worker is managed by the Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+setuptools==67.7.2
+numpy==1.24.3
+pandas==2.0.1
+influxdb_client==1.36.1
+lttbc==0.2.1
+darts==0.24.0

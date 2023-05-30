@@ -1,0 +1,14 @@
+[
+    {
+       "apiVersion":"influxdata.com/v2alpha1",
+       "kind":"Task",
+       "metadata":{
+          "name":"rusty-robinson-304001"
+       },
+       "spec":{
+          "every":"5m",
+          "name":"Downsample climates to InfluxDB Cloud",
+          "query":"import \"influxdata/influxdb/secrets\"\n\n\n\ncloudToken = secrets.get(key: \"INFLUX_CLOUD_API_TOKEN\")\n\nfrom(bucket: \"sensors\")\n    |> range(start: -5m)\n    |> filter(fn: (r) => r._measurement == \"climate\")\n    |> aggregateWindow(every: 5m, fn: mean)\n    |> to(\n        bucket: \"sensors\",\n        host: \"https://eu-central-1-1.aws.cloud2.influxdata.com\",\n        org: \"ORG\",\n        token: cloudToken,\n    )"
+       }
+    }
+ ]
