@@ -77,9 +77,6 @@ The aim of "Ground-to-AI" is to offer a simple and low-cost architecture that of
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
 Things you need to have or do before you can install the architecture.
@@ -186,7 +183,7 @@ Scripts are organised into three categories and stored in the corresponding fold
 
 - File [pixtend.py](Raspberry%20Pi/pixtend.py) : permanently executed on the « *PiXtend* » Raspberry. It is used to manage the control panel and the various PLCs needed to run the compressors, as well as logging related events. It is launched as soon as the Raspberry is booted by a superuser startup script configured via the « /etc/rc.local » file.
 - File [event.py](Raspberry%20Pi/event.py) : permanently executed on the Master Raspberry Pi. It is used to check whether a new event has occurred on the installation. In this case, it is capable of triggering a call to an *Azure* function for predictive maintenance calculations.
-- Dossier [utils](Raspberry%20Pi/utils) : contains the functions needed for the main scripts to work properly. In particular, they can be used to establish a connection with the *MySQL* database, order relays, etc.
+- Folder [utils](Raspberry%20Pi/utils) : contains the functions needed for the main scripts to work properly. In particular, they can be used to establish a connection with the *MySQL* database, order relays, etc.
 
 #### Configurations
 
