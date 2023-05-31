@@ -163,8 +163,9 @@ This section must be completed
 ## Usage
 
 <div align="center">
+    <img src="images/pixtend.jpeg" alt="Sensor" width=40%>
     <img src="images/dth11.jpeg" alt="Sensor" width=20%>
-    <img src="images/grafana.png" alt="Grafana" width=80%>
+    <img src="images/grafana.png" alt="Grafana" width=100%>
 </div>
 
 For example, you can use this framework to collect data from a temperature sensor and display it in Grafana. Afterwards, the results of a model's predictions can then be obtained via a simple Telegram notification.
