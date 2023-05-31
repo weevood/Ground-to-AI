@@ -8,7 +8,7 @@
   <h3 align="center"> Ground-to-AI </h3>
 
   <p align="center">
-    ***Architecture to collect sensors data from ground and using it to train and develop artificial intelligence models.***
+    <b>Architecture to collect sensors data from ground and using it to train and develop artificial intelligence models.</b>
     
     ***** NOTE: This documentation is still being drafted *****
   </p>
