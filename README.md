@@ -162,13 +162,19 @@ This section must be completed
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+For example, you can use this framework to collect data from a temperature sensor (connected to a [PiXtend](https://www.pixtend.de/)) and display it in Grafana. 
+
 <div align="center">
-    <img src="images/pixtend.jpeg" alt="Sensor" width=40%>
     <img src="images/dth11.jpeg" alt="Sensor" width=20%>
+    <img src="images/pixtend.jpeg" alt="PiXtend" width=40%>
     <img src="images/grafana.png" alt="Grafana" width=100%>
 </div>
 
-For example, you can use this framework to collect data from a temperature sensor and display it in Grafana. Afterwards, the results of a model's predictions can then be obtained via a simple Telegram notification.
+Afterwards, the results of a model's predictions, executed on *Azure*, can then be obtained via a simple [Telegram](https://core.telegram.org/bots/api) notification.
+
+<div align="center">
+    <img src="images/predictions.png" alt="Predictions.png" width=70%>
+</div>
 
 *Refer to the detailed script section below for more details.*
 
